@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Deep OCR demo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="static/upload.js"></script>
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+</head>
+<body>
+<div class="navbar navbar-default navbar-sticky-top">
+    <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand"  data-toggle="tab" href="#home"><img style="padding-right:50px" class="img-responsive" src="static/logo.png"></a>
+        </div>
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+            <li><a data-toggle="tab" href="#run_demo">Test Demo</a></li>
+            <li><a data-toggle="tab" href="#Aboutme">About me</a></li>
+        </ul>
+    </div>
+</div>
+
+
+
+<div class="tab-content">
+    <div id="home" class="container tab-pane fade in active">
+        <h1 class="text-center">Deep OCR with YOLO 3</h1>
+        <p>A deep Learning based OCR solution created using State-of-Art deep learning models <mark>YOLO</mark> and <mark>RCNN</mark>.</p>
+        <ul>
+            <li>
+                <p>A RCNN is trained to detect ID cards/Documents in complex scenes.</p>
+            </li>
+
+            <li>
+                <p>Detected document is cropped and adjusted in correct orientation using computer vison techniques.</p>
+            </li>
+
+            <li>
+                <p>A document classifer was trained with YOLO that classifies documents as Pan, Aadhaar or others. It also classifies different formats of each documents.</p>
+            </li>
+
+            <li>
+                <p>Different YOLO models are trained for PAN and aadhaar card to detect and classify various entites in the document.</p>
+            </li>
+
+            <li>
+                <p>Each entity is cropped and passes through tessaract OCR engine and text preprocessing to get clean text output.</p>
+            </li>
+
+            <li>
+                <p>The model has demonstrated good results even in challanging images. It can handle ID cards in complex backgrounds, wrong orientation and even works on photocopies.</p>
+            </li>
+
+        </ul>
+
+
+        <div class="container" id="videos">
+            <div class="row">
+                <h2 class="text-center">AI in Action </h2>
+
+                <div class="col-sm-6 thumbnail">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <video src="static/images/demo2.mp4" type="video/mp4" width="560" height="315" muted="" controls="" loop="" autoplay="">
+                            "Your browser does not support the video tag"
+                        </video>
+                    </div>
+                    <div class="caption">
+                        <p>Tensorflow model for Document detection and Document classification model running in real time.</p>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 thumbnail">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <video src="static/images/demo1.mp4" type="video/mp4" width="560" height="315" muted="" controls="" loop="" autoplay="">
+                            "Your browser does not support the video tag"
+                        </video>
+                    </div>
+                    <div class="caption">
+                        <p>A custom YOLO Object detection model trained to detect <mark>name entites</mark> in the Documents running in real time.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="static/profile.jpg" alt="shashank" style="width:100%">
+            <h1>Shashank Tanawar</h1>
+            <p class="title">Advanced Analyst</p>
+            <p id="companyName">Ernst & Young (EY)</p>
+            <div class = "contact">
+                <a href="#"><i class="fa fa-dribbble"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+                <a href="#"><i class="fa fa-facebook"></i></a>
+            </div>
+            <p><button id="contact_btn">Contact</button></p>
+        </div>
+    </div>
+
+    <div id="run_demo" class="container tab-pane fade">
+        <h2 > Run Demo </h2>
+        <form id="upload-file" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="file">Select a file</label>
+                <input name="file" type="file" class="form-control">
+            </div>
+            <div class="text-center">
+                <button type='button' id ='retrieve' class="btn btn-primary">GO!</button>
+            </div>
+        </form>
+
+        <div class="ajax-loader text-center">
+            <img src="static/loading.gif" class="img-responsive" />
+        </div>
+
+
+        <div id="results_img" class="container">
+            <h3> Results</h3>
+            <div>
+                <h4>JSON Output</h4>
+                <p id="doc_info"></p>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <h3>Document Detection</h3>
+                    <div class="thumbnail">
+                        <img src="" id="myimg" class="img-responsive" style="width:100%">
+                        <div class="caption">
+                            <p>A Tensorflow RCNN model is trained to detect ID cards/documents even in complex and challenging backgrounds.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <h3>Document Classification and Adjustments</h3>
+                    <div class="thumbnail">
+                        <img src="" id="myimg1" class="img-responsive" style="width:100%">
+                        <div class="caption">
+                            <p>A YOLO object detection model is trained to detect document specific landmarks to classify documents as PAN, AADHAR, Driving License, Bank Statement etc.
+                                Document orientation is also adjusted with <mark>Computer Vision</mark>techniques.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <h3>Entity Detection with YOLO</h3>
+                    <div class="thumbnail">
+                        <img src="" id="myimg2" class="img-responsive" style="width:100%">
+                        <div class="caption">
+                            <p>Seperate YOLO models are trained for each type of document to detect and classify various entites
+                                in the document like Name, ID number, DOB etc. These entites are cropped, prerpocessed and passed to Tessaract OCR engine to get text data.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="container" id="results_ocr">
+                <div class="jumbotron">
+                    <h1>OCR Results</h1>
+                    <p id="ocrText">Here will be the results.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+</html>
+

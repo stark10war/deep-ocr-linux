@@ -1,0 +1,69 @@
+
+    <h2 class="runDemo"> Run Demo </h2>
+    <form id="upload-file" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="file">Select a file</label>
+            <input name="file" type="file" class="form-control">
+        </div>
+        <div class="text-center">
+            <button type='button' id ='retrieve' class="btn btn-primary">GO!</button>
+        </div>
+    </form>
+</div>
+
+
+<div class="ajax-loader">
+    <img src="static/loading.gif" class="img-responsive" />
+</div>
+
+
+<div id="results_img" class="container">
+    <h3> Results</h3>
+    <div>
+        <h4>JSON Output</h4>
+        <p id="doc_info"></p>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <h3>Document Detection</h3>
+            <div class="thumbnail">
+                <img src="" id="myimg" class="img-responsive" style="width:100%">
+                <div class="caption">
+                    <p>A Tensorflow RCNN model is trained to detect ID cards/documents even in complex and challenging backgrounds.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <h3>Document Classification and Adjustments</h3>
+            <div class="thumbnail">
+                <img src="" id="myimg1" class="img-responsive" style="width:100%">
+                <div class="caption">
+                    <p>A YOLO object detection model is trained to detect document specific landmarks to classify documents as PAN, AADHAR, Driving License, Bank Statement etc.
+                        Document orientation is also adjusted with <mark>Computer Vision</mark>techniques.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <h3>Entity Detection with YOLO</h3>
+            <div class="thumbnail">
+                <img src="" id="myimg2" class="img-responsive" style="width:100%">
+                <div class="caption">
+                    <p>Seperate YOLO models are trained for each type of document to detect and classify various entites
+                        in the document like Name, ID number, DOB etc. These entites are cropped, prerpocessed and passed to Tessaract OCR engine to get text data.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="container" id="results_ocr">
+        <div class="jumbotron">
+            <h1>OCR Results</h1>
+            <p id="ocrText">Here will be the results.</p>
+        </div>
+    </div>
+
+</div>
